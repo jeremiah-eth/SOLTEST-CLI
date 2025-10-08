@@ -176,7 +176,7 @@ export default defineConfig({
   
   // Build configuration
   build: {
-    outDir: 'dist',
+    outDir: 'docs/.vitepress/dist',
     assetsDir: 'assets',
     sourcemap: true,
     minify: 'terser'

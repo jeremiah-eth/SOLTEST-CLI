@@ -1,0 +1,56 @@
+# Development files
+.git/
+.gitignore
+.github/
+.vscode/
+.idea/
+
+# Documentation source
+docs/
+*.md
+!README.md
+
+# Test files
+test/
+coverage/
+security-reports/
+
+# Build artifacts
+build/
+types/
+node_modules/
+
+# Development dependencies
+tsconfig.json
+bun.lock
+package-lock.json
+yarn.lock
+
+# Project files
+contracts/
+deploy/
+templates/
+plugins/
+soltest.config.js
+
+# IDE and editor files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+tmp/
+temp/
