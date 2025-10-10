@@ -89,8 +89,17 @@ export class Deployer {
         throw new Error('Not connected to any network');
       }
       
+      // First try to get accounts from the wallet (if private key was loaded)
+      const walletAccounts = this.web3.eth.accounts.wallet;
+      if (walletAccounts && walletAccounts.length > 0) {
+        const addresses = walletAccounts.map(account => account.address);
+        console.log(chalk.blue(`📋 Found ${addresses.length} accounts from wallet`));
+        return addresses;
+      }
+      
+      // Fallback to getting accounts from the network
       const accounts = await this.web3.eth.getAccounts();
-      console.log(chalk.blue(`📋 Found ${accounts.length} accounts`));
+      console.log(chalk.blue(`📋 Found ${accounts.length} accounts from network`));
       
       return accounts;
     } catch (error) {

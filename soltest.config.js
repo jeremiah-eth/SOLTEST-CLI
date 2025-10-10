@@ -43,6 +43,22 @@ module.exports = {
       accounts: ['PRIVATE_KEY_FROM_ENV'],
       chainId: 137,
       gasPrice: 'auto'
+    },
+    
+    // Base Sepolia testnet
+    baseSepolia: {
+      url: 'https://sepolia.base.org',
+      accounts: ['PRIVATE_KEY_FROM_ENV'],
+      chainId: 84532,
+      gasPrice: 'auto'
+    },
+    
+    // Base mainnet
+    base: {
+      url: 'https://mainnet.base.org',
+      accounts: ['PRIVATE_KEY_FROM_ENV'],
+      chainId: 8453,
+      gasPrice: 'auto'
     }
   },
   
