@@ -23,11 +23,15 @@ import type {
   NetworkConfig 
 } from '../types';
 
+// Read version from package.json
+const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8'));
+const version = packageJson.version;
+
 // Configure program
 program
   .name('soltest')
   .description('Smart contract testing CLI')
-  .version('1.0.0');
+  .version(version);
 
 // Initialize plugin manager
 const pluginManager = new PluginManager('./plugins');
@@ -1080,7 +1084,7 @@ function getConstructorArgs(contractType: string, details: ContractDetails): str
 async function generatePackageJson(answers: ProjectAnswers, contractDetails: ContractDetails): Promise<void> {
   const packageJson = {
     name: answers.projectName,
-    version: '1.0.0',
+    version: '1.1.2',
     description: `A Soltest project for ${contractDetails.tokenName}`,
     main: 'index.js',
     scripts: {

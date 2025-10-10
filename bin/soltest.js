@@ -17,11 +17,15 @@ import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
 
+// Read version from package.json
+const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf8'));
+const version = packageJson.version;
+
 // Configure program
 program
   .name('soltest')
   .description('Smart contract testing CLI')
-  .version('1.0.0');
+  .version(version);
 
 // Compile command
 program
@@ -779,7 +783,7 @@ function getConstructorArgs(contractType, details) {
 async function generatePackageJson(answers, contractDetails) {
   const packageJson = {
     name: answers.projectName,
-    version: '1.0.0',
+    version: '1.1.2',
     description: `A Soltest project for ${contractDetails.tokenName}`,
     main: 'index.js',
     scripts: {
