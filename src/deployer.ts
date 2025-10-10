@@ -41,10 +41,50 @@ export class Deployer {
       if (isConnected !== false) {
         console.log(chalk.yellow('⚠️  Node is still syncing'));
       }
+
+      // Handle private key loading
+      await this._loadPrivateKey(rpcUrl);
       
     } catch (error) {
       console.error(chalk.red(`❌ Failed to connect to ${rpcUrl}: ${(error as Error).message}`));
       throw new Error(`Connection failed: ${(error as Error).message}`);
+    }
+  }
+
+  /**
+   * Load private key from environment and set up wallet
+   * @param rpcUrl - RPC URL to determine if it's local network
+   * @returns Promise that resolves when private key is loaded
+   */
+  private async _loadPrivateKey(rpcUrl: string): Promise<void> {
+    const isLocalNetwork = rpcUrl.includes('127.0.0.1') || rpcUrl.includes('localhost');
+    
+    if (process.env.PRIVATE_KEY) {
+      try {
+        // Clean private key (remove 0x if present)
+        const privateKey = process.env.PRIVATE_KEY.replace('0x', '');
+        
+        // Add to web3 wallet
+        const account = (this.web3 as any).eth.accounts.privateKeyToAccount('0x' + privateKey);
+        (this.web3 as any).eth.accounts.wallet.add(account);
+        
+        // Set as default account
+        (this.web3 as any).eth.defaultAccount = account.address;
+        
+        // Show deployer address
+        console.log(chalk.green(`💰 Deployer address: ${account.address}`));
+        
+      } catch (error) {
+        console.error(chalk.red(`❌ Failed to load private key: ${(error as Error).message}`));
+        throw new Error(`Private key loading failed: ${(error as Error).message}`);
+      }
+    } else {
+      // No private key found
+      if (isLocalNetwork) {
+        console.log(chalk.yellow('⚠️  No PRIVATE_KEY found, using Ganache accounts'));
+      } else {
+        throw new Error('No PRIVATE_KEY found in .env');
+      }
     }
   }
 
