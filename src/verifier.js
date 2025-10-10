@@ -16,7 +16,8 @@ export class ContractVerifier {
       polygonscan: process.env.POLYGONSCAN_API_KEY,
       bscscan: process.env.BSCSCAN_API_KEY,
       arbiscan: process.env.ARBISCAN_API_KEY,
-      snowtrace: process.env.SNOWTRACE_API_KEY
+      snowtrace: process.env.SNOWTRACE_API_KEY,
+      basescan: process.env.BASESCAN_API_KEY
     };
     
     this.explorerUrls = {
@@ -24,7 +25,8 @@ export class ContractVerifier {
       polygonscan: 'https://api.polygonscan.com/api',
       bscscan: 'https://api.bscscan.com/api',
       arbiscan: 'https://api.arbiscan.io/api',
-      snowtrace: 'https://api.snowtrace.io/api'
+      snowtrace: 'https://api.snowtrace.io/api',
+      basescan: 'https://api-sepolia.basescan.org/api'
     };
     
     this.networkMappings = {
@@ -34,7 +36,9 @@ export class ContractVerifier {
       mumbai: 'polygonscan',
       bsc: 'bscscan',
       arbitrum: 'arbiscan',
-      avalanche: 'snowtrace'
+      avalanche: 'snowtrace',
+      baseSepolia: 'basescan',
+      base: 'basescan'
     };
   }
 
